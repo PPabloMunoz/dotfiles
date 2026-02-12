@@ -1,6 +1,6 @@
-tap "caarlos0/tap"
+tap "caarlos0/tap" if OS.mac?
 tap "jesseduffield/lazygit"
-tap "nikitabobko/tap"
+tap "nikitabobko/tap" if OS.mac?
 tap "oven-sh/bun"
 
 brew "bat"
