@@ -9,6 +9,9 @@ ZSH_CFG="$XDG_CONFIG_HOME/zsh"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+HISTFILE=$HOME/.zsh_history # Persist history
+HISTSIZE=1000000
+SAVEHIST=1000000
 INC_APPEND_HISTORY="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
@@ -130,6 +133,8 @@ alias rest="timer 10m && terminal-notifier -message 'Pomodoro'\
         -sound Crystal"
 
 source <(carapace _carapace)
+
+eval "$(starship init zsh)"
 
 # ====== Final ======
 

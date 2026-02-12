@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+if command -v brew >/dev/null 2>&1; then
+  echo "Installing packages from Brewfile..."
+  brew bundle --file="$HOME/Brewfile"
+else
+  echo "Homebrew not found"
+fi
+

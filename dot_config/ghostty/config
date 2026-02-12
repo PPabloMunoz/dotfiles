@@ -1,0 +1,19 @@
+theme = Catppuccin Mocha
+cursor-text = #1C1C24
+mouse-hide-while-typing = true
+
+font-family = "JetBrains Mono Nerd Font" # Most recommended dev font
+font-size = 15
+font-thicken = true
+adjust-cell-height = 15%
+
+background-opacity = 0.95
+background-blur-radius = 25
+window-save-state = always
+macos-titlebar-style = hidden
+
+# Clipboard behavior
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+
+shell-integration = zsh

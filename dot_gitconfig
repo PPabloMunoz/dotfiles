@@ -1,0 +1,33 @@
+[user]
+    email=pablomunoz@pablomunoz.dev
+    username=Pablo Muñoz
+    name=Pablo Muñoz
+    signingkey = 
+
+# Override identity for University folder
+[includeIf "gitdir:~/dev/uni/"]
+    path = ~/.gitconfig-university
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[pager]
+    diff = false
+    log = false
+    status = false
+
+[core]
+    editor = nvim
+    autocrlf = input
+
+[commit]
+    gpgsign = true
