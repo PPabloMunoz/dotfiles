@@ -1,0 +1,58 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """\
+[╭╴](fg:arrow)\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status
+[╰─](fg:arrow)$character\
+"""
+
+add_newline = true # Disable the blank line at the start of the prompt
+command_timeout = 1000 # 1 second
+
+palette = "normal"
+
+[palettes.normal]
+arrow = "#333533"
+directory = "#9ffff5"
+git = "#f17f29"
+git_status = "#DFEBED"
+
+# I disabled some modules (Rust, Java...) since some things aren't installed in my machine, enable them if you need.
+
+[username]
+style_user = 'bold'
+style_root = 'bold'
+format = ' [$user](fg:$style)'
+show_always = true
+
+[hostname]
+ssh_only = false
+format = ' on [$hostname](bold red) in '
+disabled = false
+
+[character]
+success_symbol = "[󰍟](fg:arrow)"
+error_symbol = "[󰍟](fg:red)"
+
+[git_branch]
+format = '[$symbol $branch ]($style)'
+symbol = ""
+style = "bold fg:git"
+
+[git_status]
+style = "fg:git"
+format = '[($all_status$ahead_behind )]($style)'
+
+[directory]
+format = "[$path](bold $style)[$read_only]($read_only_style) "
+truncation_length = 4
+style = "fg:directory"
+read_only_style = "fg:directory"
+before_repo_root_style = "fg:directory"
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only = "  "
