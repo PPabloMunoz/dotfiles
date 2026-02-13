@@ -1,7 +1,6 @@
 tap "caarlos0/tap" if OS.mac?
 tap "jesseduffield/lazygit"
 tap "nikitabobko/tap" if OS.mac?
-tap "oven-sh/bun"
 
 brew "bat"
 brew "carapace"
@@ -44,7 +43,6 @@ brew "unzip"
 brew "wget"
 brew "zoxide"
 brew "caarlos0/tap/timer" if OS.mac?
-brew "oven-sh/bun/bun"
 
 cask "1password" if OS.mac?
 cask "1password-cli" if OS.mac?

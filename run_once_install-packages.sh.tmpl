@@ -1,10 +1,61 @@
 #!/bin/sh
 set -eu
 
+{{ if eq .chezmoi.os "darwin" -}}
 if command -v brew >/dev/null 2>&1; then
   echo "Installing packages from Brewfile..."
   brew bundle --file="$HOME/Brewfile"
+
+  echo "Installing bun..."
+  curl -fsSL https://bun.sh/install | bash
 else
   echo "Homebrew not found"
 fi
+{{ else if eq .chezmoi.os "linux" -}}
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  if [ "$ID" = "ubuntu" ] || [ "$ID_LIKE" = "debian" ]; then
+    echo "Installing packages with apt..."
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install -y \
+      build-essential \
+      gpg \
+      wget \
+      curl \
+      git \
+      vim \
+      zsh \
+      starship \
+      carapace-bin \
+      bat \
+      fd-find \
+      fzf \
+      jq \
+      htop \
+      ripgrep
+
+
+    echo "Installing snapd..."
+    sudo apt install snapd
+
+    echo "Installing nvim..."
+    sudo snap install nvim --classic
+
+    echo "Installing eza..."
+    sudo mkdir -p /etc/apt/keyrings
+    wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+    sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+    sudo apt update
+    sudo apt install -y eza
+
+    echo "Installing zoxide..."
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+    echo "Installing bun..."
+    curl -fsSL https://bun.sh/install | bash
+  fi
+fi
+{{ end -}}
 
