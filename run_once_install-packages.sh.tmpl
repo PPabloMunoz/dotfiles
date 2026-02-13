@@ -61,6 +61,9 @@ if [ -f /etc/os-release ]; then
 
     echo "Installing bun..."
     curl -fsSL https://bun.sh/install | bash
+
+    echo "Installing chezmoi..."
+    sh -c "$(curl -fsLS get.chezmoi.io)"
   fi
 fi
 {{ end -}}
