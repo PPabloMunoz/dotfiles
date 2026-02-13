@@ -36,9 +36,8 @@ if [ -f /etc/os-release ]; then
       ripgrep
 
     echo "Installing carapace..."
-    mkdir -p /etc/apt/sources.list.d/
     sudo touch /etc/apt/sources.list.d/fury.list
-    echo "deb [trusted=yes] https://apt.fury.io/rsteube/ /" >> /etc/apt/sources.list.d/fury.list
+    echo "deb [trusted=yes] https://apt.fury.io/rsteube/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
     sudo apt-get update 
     sudo apt-get install carapace-bin
 
