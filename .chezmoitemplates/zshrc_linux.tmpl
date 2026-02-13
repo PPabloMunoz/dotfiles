@@ -1,0 +1,126 @@
+# My ZSH configuration - Mac Mini M4
+
+export TERM=xterm-256color
+export XDG_CONFIG_HOME=$HOME/.config
+
+# ====== General ======
+
+ZSH_CFG="$XDG_CONFIG_HOME/zsh"
+DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+HISTFILE=$HOME/.zsh_history # Persist history
+HISTSIZE=1000000
+SAVEHIST=1000000
+INC_APPEND_HISTORY="true"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
+setopt appendhistory
+setopt HIST_IGNORE_ALL_DUPS
+setopt autocd extendedglob nomatch menucomplete interactive_comments
+unsetopt correct_all BEEP
+autoload -Uz colors && colors
+bindkey -e
+
+# ====== Exports ======
+
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+export PATH="$HOME/.bun/bin:$PATH"
+export PATH=/opt/homebrew/sbin:$PATH # Recommended by brew doctor
+export PATH=/opt/homebrew/bin:$PATH  # Brew is first as everything else uses that
+
+export CARAPACE_BRIDGES='zsh'
+
+export NODE_ENV=development
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export EDITOR="nvim"
+
+# ====== Aux Functions ======
+
+eval_if_exists() {
+    local cmd="$1"
+    local eval_str="$2"
+
+    if command -v "$cmd" >/dev/null 2>&1; then
+        eval "$eval_str"
+    fi
+}
+
+function zsh_add_config() {
+  [ -f "$XDG_CONFIG_HOME/zsh/$1" ] && source "$XDG_CONFIG_HOME/zsh/$1"
+}
+
+function zsh_add_plugin() {
+  PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+
+  if [ -d "$XDG_CONFIG_HOME/zsh/plugins/$PLUGIN_NAME" ]; then
+    zsh_add_config "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || zsh_add_config "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+  else
+    git clone "https://github.com/$1.git" "$XDG_CONFIG_HOME/zsh/plugins/$PLUGIN_NAME"
+  fi
+}
+
+# ====== Completions ======
+
+autoload -Uz compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+
+_comp_options+=(globdots)
+compinit
+
+eval_if_exists "zoxide" "$(zoxide init zsh)"
+eval_if_exists "fnm" "$(fnm env)"
+eval_if_exists "fzf" "$(fzf --zsh)"
+
+[ -s "/Users/pablomunoz/.bun/_bun" ] && source "/Users/pablomunoz/.bun/_bun"
+
+# ====== Plugins ======
+
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+zsh_add_plugin "michaelAquilina/zsh-you-should-use"
+
+# ====== Alias ======
+
+alias ls="eza -s type"
+alias ll="eza --color=always --icons --no-time --git --long"
+alias la="eza --color=always --icons --no-time --git --long --all"
+
+alias cat="bat --paging=never --wrap=never --style=plain"
+alias cd="z"
+alias lg="lazygit -ucd ~/.config/lazygit/"
+
+# ZSH
+alias zsh:reload="source $HOME/.zshrc"
+alias zsh:edit="nvim $HOME/.zshrc"
+
+# Tmux
+alias t="tmux"
+alias ta="t a"
+alias tls="t ls"
+alias tn="t new -t"
+
+# Git
+alias gl='git pull'
+alias gp='git push'
+
+alias gs='git status'
+alias gss='git status -s'
+
+alias ga='git add'
+alias gaa='git add --all'
+
+alias gc='git commit -m'
+
+alias gdiff='git diff'
+
+source <(carapace _carapace)
+
+eval "$(starship init zsh)"
+
+# ====== Final ======
