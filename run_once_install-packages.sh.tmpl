@@ -35,6 +35,8 @@ if [ -f /etc/os-release ]; then
       htop \
       ripgrep
 
+    echo "Installing carapace..."
+    echo "deb [trusted=yes] https://apt.fury.io/rsteube/ /" >> /etc/apt/sources.list.d/fury.list
 
     echo "Installing snapd..."
     sudo apt install snapd
