@@ -63,7 +63,7 @@ if [ -f /etc/os-release ]; then
     curl -fsSL https://bun.sh/install | bash
 
     echo "Installing chezmoi..."
-    sh -c "$(curl -fsLS get.chezmoi.io)"
+    snap install chezmoi --classic
   fi
 fi
 {{ end -}}
