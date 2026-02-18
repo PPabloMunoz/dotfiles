@@ -64,7 +64,7 @@ show_always = true
 
 [hostname]
 ssh_only = false
-format = ' on [$hostname](bold red) in '
+format = ' on [$hostname](bold red) in'
 disabled = false
 
 [character]
