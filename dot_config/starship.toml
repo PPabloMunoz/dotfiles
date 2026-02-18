@@ -6,14 +6,47 @@ $username\
 $hostname\
 $directory\
 $git_branch\
-$git_status
+$git_state\
+$git_status\
+$git_metrics\
+$cmd_duration
 [╰─](fg:arrow)$character\
 """
 
 add_newline = true # Disable the blank line at the start of the prompt
-command_timeout = 1000 # 1 second
+command_timeout = 2000 # 2 seconds
 
 palette = "normal"
+
+[cmd_duration]
+format = "[$symbol $duration]($style) "
+style = "bold cyan"
+min_time = 1000
+show_notifications = false
+
+[git_state]
+format = "[\\($state( $progress_current/$progress_total)\\)]($style) "
+style = "bold red"
+
+[git_metrics]
+added_style = "bold blue"
+format = "[+$added]($added_style)/[-$deleted]($deleted_style) "
+deleted_style = "bold red"
+disabled = false
+
+[fill]
+symbol = " "
+
+[directory]
+format = "[$symbol $path](bold $style)[$read_only]($read_only_style) "
+truncation_length = 4
+style = "fg:directory"
+read_only_style = "fg:directory"
+before_repo_root_style = "dimmed fg:directory"
+truncation_symbol = "…/"
+truncate_to_repo = false
+read_only = "  "
+home_symbol = "~"
 
 [palettes.normal]
 arrow = "#333533"
@@ -46,13 +79,3 @@ style = "bold fg:git"
 [git_status]
 style = "fg:git"
 format = '[($all_status$ahead_behind )]($style)'
-
-[directory]
-format = "[$path](bold $style)[$read_only]($read_only_style) "
-truncation_length = 4
-style = "fg:directory"
-read_only_style = "fg:directory"
-before_repo_root_style = "fg:directory"
-truncation_symbol = "…/"
-truncate_to_repo = false
-read_only = "  "
