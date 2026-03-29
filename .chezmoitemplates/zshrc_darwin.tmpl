@@ -33,6 +33,7 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH=/opt/homebrew/sbin:$PATH # Recommended by brew doctor
 export PATH=/opt/homebrew/bin:$PATH  # Brew is first as everything else uses that
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
 
 export CARAPACE_BRIDGES='zsh'
 
@@ -79,6 +80,7 @@ compinit
 eval_if_exists "zoxide" "$(zoxide init zsh)"
 eval_if_exists "fnm" "$(fnm env)"
 eval_if_exists "fzf" "$(fzf --zsh)"
+eval "$(jenv init -)"
 
 [ -s "/Users/pablomunoz/.bun/_bun" ] && source "/Users/pablomunoz/.bun/_bun"
 
