@@ -7,11 +7,13 @@ return {
     lazy = false,
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter').setup({
-        auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
+      -- local tr = require('nvim-treesitter')
+      -- tr.setup({
+      --   auto_install = true,
+      --   highlight = { enable = true },
+      --   indent = { enable = true },
+      -- })
+      -- tr.install({ 'go', 'typescript' })
     end,
   },
 }
