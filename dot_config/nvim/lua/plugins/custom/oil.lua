@@ -3,13 +3,16 @@
 return {
   {
     'refractalize/oil-git-status.nvim',
-    dependencies = {
-      'stevearc/oil.nvim',
-    },
+    dependencies = { 'stevearc/oil.nvim' },
     config = true,
   },
   {
     'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    lazy = false,
+
+    ---@module 'oil'
+    ---@type oil.SetupOpts
     opts = {
       default_file_explorer = true,
       columns = { 'icon' },
@@ -34,17 +37,9 @@ return {
         ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
         ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
       },
-      view_options = {
-        show_hidden = true,
-      },
-      preview_win = {
-        update_on_cursor_moved = true,
-      },
-      win_options = {
-        signcolumn = 'yes:2',
-      },
+      preview_win = { update_on_cursor_moved = true },
+      win_options = { signcolumn = 'yes:2' },
+      view_options = { show_hidden = true },
     },
-    dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
-    lazy = false,
   },
 }

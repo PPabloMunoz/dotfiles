@@ -4,10 +4,10 @@ return {
   'brenoprata10/nvim-highlight-colors',
   event = 'BufReadPre',
   config = function()
-    require('nvim-highlight-colors').setup {
-      render = 'background',
+    require('nvim-highlight-colors').setup({
+      render = 'foreground',
       enable_named_colors = true,
       enable_tailwind = true,
-    }
+    })
   end,
 }
