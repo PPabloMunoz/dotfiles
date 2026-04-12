@@ -27,6 +27,7 @@ require('lazy').setup({
   require('plugins.custom.lazygit'),
   require('plugins.custom.highlight-colors'),
   require('plugins.custom.vim-tmux-navigator'),
+  require('plugins.custom.gopher'),
 }, {
   lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',
   ui = {

@@ -22,7 +22,7 @@ return {
         format_on_save = { timeout_ms = 500, lsp_format = 'fallback' },
         formatters_by_ft = {
           lua = { 'stylua' },
-          golang = { 'goimports', 'golangci-lint' },
+          go = { 'goimports', 'gofumpt' },
         },
       })
     end,
