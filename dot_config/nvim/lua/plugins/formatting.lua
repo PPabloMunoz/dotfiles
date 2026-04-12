@@ -19,6 +19,7 @@ return {
       require('conform').setup({
         notify_on_error = true,
         notify_no_formatters = true,
+        format_on_save = { timeout_ms = 500, lsp_format = 'fallback' },
         formatters_by_ft = {
           lua = { 'stylua' },
           golang = { 'goimports', 'golangci-lint' },
