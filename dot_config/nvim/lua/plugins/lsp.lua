@@ -51,7 +51,7 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       require('mason-tool-installer').setup({
-        ensure_installed = { 'stylua', 'lua_ls', 'gopls', 'goimports', 'golangci-lint' },
+        ensure_installed = { 'stylua', 'lua_ls', 'gopls', 'goimports', 'golangci-lint', 'gofumpt' },
       })
 
       require('mason-lspconfig').setup({
