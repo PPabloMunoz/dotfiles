@@ -17,6 +17,7 @@ vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.autoindent = true
 vim.o.signcolumn = 'yes'
+vim.o.colorcolumn = "120"
 vim.o.updatetime = 100
 vim.o.timeoutlen = 300
 
