@@ -23,6 +23,11 @@ return {
         formatters_by_ft = {
           lua = { 'stylua' },
           go = { 'goimports', 'gofumpt' },
+          javascript = { 'oxlint', 'oxfmt' },
+          typescript = { 'oxlint', 'oxfmt' },
+          javascriptreact = { 'oxlint', 'oxfmt' },
+          typescriptreact = { 'oxlint', 'oxfmt' },
+          astro = { 'oxlint', 'oxfmt' },
         },
       })
     end,
