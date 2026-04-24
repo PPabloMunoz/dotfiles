@@ -1,15 +1,13 @@
-# My ZSH configuration - Mac Mini M4
-
+# My ZSH configuration
 export TERM=xterm-256color
 export XDG_CONFIG_HOME=$HOME/.config
 
 # ====== General ======
-
 ZSH_CFG="$XDG_CONFIG_HOME/zsh"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-HISTFILE=$HOME/.zsh_history # Persist history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 INC_APPEND_HISTORY="true"
@@ -23,48 +21,43 @@ autoload -Uz colors && colors
 bindkey -e
 
 # ====== Exports ======
-
-export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+# Standard paths
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:$HOME/.local/bin:$PATH"
+# Go
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
+# Bun
 export PATH="$HOME/.bun/bin:$PATH"
-export PATH=/opt/homebrew/sbin:$PATH # Recommended by brew doctor
-export PATH=/opt/homebrew/bin:$PATH  # Brew is first as everything else uses that
+# Tools/SDKs
+export PATH="/opt/homebrew/opt/openjdk@21/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
 
 export CARAPACE_BRIDGES='zsh'
-
 export NODE_ENV=development
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 
-# ====== Aux Functions ======
-
+# ====== Functions ======
 eval_if_exists() {
-    local cmd="$1"
-    local eval_str="$2"
-
-    if command -v "$cmd" >/dev/null 2>&1; then
-        eval "$eval_str"
+    if command -v "$1" >/dev/null 2>&1; then
+        eval "$2"
     fi
 }
 
-function zsh_add_config() {
-  [ -f "$XDG_CONFIG_HOME/zsh/$1" ] && source "$XDG_CONFIG_HOME/zsh/$1"
-}
+zsh_add_plugin() {
+  local PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+  local PLUGIN_DIR="$XDG_CONFIG_HOME/zsh/plugins/$PLUGIN_NAME"
 
-function zsh_add_plugin() {
-  PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-
-  if [ -d "$XDG_CONFIG_HOME/zsh/plugins/$PLUGIN_NAME" ]; then
-    zsh_add_config "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || zsh_add_config "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-  else
-    git clone "https://github.com/$1.git" "$XDG_CONFIG_HOME/zsh/plugins/$PLUGIN_NAME"
+  if [ ! -d "$PLUGIN_DIR" ]; then
+    git clone "https://github.com/$1.git" "$PLUGIN_DIR"
   fi
+
+  for file in "$PLUGIN_DIR/$PLUGIN_NAME.plugin.zsh" "$PLUGIN_DIR/$PLUGIN_NAME.zsh"; do
+    [ -f "$file" ] && source "$file" && break
+  done
 }
 
 # ====== Completions ======
-
 autoload -Uz compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
@@ -74,25 +67,28 @@ _comp_options+=(globdots)
 compinit
 
 eval_if_exists "zoxide" "$(zoxide init zsh)"
+eval_if_exists "fnm" "$(fnm env)"
 eval_if_exists "fzf" "$(fzf --zsh)"
+eval_if_exists "jenv" "$(jenv init -)"
 
-[ -s "/Users/pablomunoz/.bun/_bun" ] && source "/Users/pablomunoz/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # ====== Plugins ======
-
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "michaelAquilina/zsh-you-should-use"
 
-# ====== Alias ======
-
+# ====== Aliases ======
+# Navigation & LS
 alias ls="eza -s type"
 alias ll="eza --color=always --icons --no-time --git --long"
 alias la="eza --color=always --icons --no-time --git --long --all"
-
-alias cat="bat --paging=never --wrap=never --style=plain"
 alias cd="z"
+
+# Tools
+alias cat="bat --paging=never --wrap=never --style=plain"
 alias lg="lazygit -ucd ~/.config/lazygit/"
+alias vim="nvim"
 
 # ZSH
 alias zsh:reload="source $HOME/.zshrc"
@@ -107,19 +103,13 @@ alias tn="t new -t"
 # Git
 alias gl='git pull'
 alias gp='git push'
-
 alias gs='git status'
 alias gss='git status -s'
-
 alias ga='git add'
 alias gaa='git add --all'
-
 alias gc='git commit -m'
-
 alias gdiff='git diff'
 
-source <(carapace _carapace)
-
-eval "$(starship init zsh)"
-
-# ====== Final ======
+# Init tools
+eval_if_exists "carapace" "source <(carapace _carapace)"
+eval_if_exists "starship" "$(starship init zsh)"
