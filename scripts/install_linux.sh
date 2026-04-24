@@ -1,23 +1,12 @@
 #!/bin/sh
 set -eu
 
-{{ if eq .chezmoi.os "darwin" -}}
-if command -v brew >/dev/null 2>&1; then
-  echo "Installing packages from Brewfile..."
-  brew bundle --file="$HOME/Brewfile"
-
-  echo "Installing bun..."
-  curl -fsSL https://bun.sh/install | bash
-else
-  echo "Homebrew not found"
-fi
-{{ else if eq .chezmoi.os "linux" -}}
 if [ -f /etc/os-release ]; then
   . /etc/os-release
   if [ "$ID" = "ubuntu" ] || [ "$ID_LIKE" = "debian" ]; then
     echo "Installing packages with apt..."
     sudo apt update
-    sudo apt upgrade
+    sudo apt upgrade -y
     sudo apt install -y \
       build-essential \
       gpg \
@@ -25,10 +14,8 @@ if [ -f /etc/os-release ]; then
       wget \
       curl \
       git \
-      vim \
       zsh \
       starship \
-      carapace-bin \
       bat \
       fd-find \
       fzf \
@@ -40,10 +27,10 @@ if [ -f /etc/os-release ]; then
     sudo touch /etc/apt/sources.list.d/fury.list
     echo "deb [trusted=yes] https://apt.fury.io/rsteube/ /" | sudo tee -a /etc/apt/sources.list.d/fury.list
     sudo apt-get update 
-    sudo apt-get install carapace-bin
+    sudo apt-get install -y carapace-bin
 
     echo "Installing snapd..."
-    sudo apt install snapd
+    sudo apt install -y snapd
 
     echo "Installing nvim..."
     sudo snap install nvim --classic
@@ -59,12 +46,13 @@ if [ -f /etc/os-release ]; then
     echo "Installing zoxide..."
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-    echo "Installing bun..."
-    curl -fsSL https://bun.sh/install | bash
-
     echo "Installing chezmoi..."
-    snap install chezmoi --classic
+    sudo snap install chezmoi --classic
+  else
+    echo "This script only supports Ubuntu/Debian based distributions."
+    exit 1
   fi
+else
+  echo "/etc/os-release not found."
+  exit 1
 fi
-{{ end -}}
-

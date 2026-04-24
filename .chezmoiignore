@@ -1,4 +1,5 @@
 .gitconfig
+scripts/**
 
 {{ if ne .chezmoi.os "darwin" }}
 .config/aerospace
