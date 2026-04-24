@@ -32,12 +32,13 @@ compile_parser() {
 
   local SOURCES="src/parser.c"
   [ -f src/scanner.c ] && SOURCES="$SOURCES src/scanner.c"
+  [ -f src/scanner.cc ] && SOURCES="$SOURCES src/scanner.cc"
 
   if [ "$OS" = "Darwin" ]; then
     gcc -o "$PARSER_DIR/$name.so" -shared -fPIC -Os \
-      -undefined dynamic_lookup -I src $SOURCES
+      -undefined dynamic_lookup -I src $SOURCES -lstdc++
   else
-    gcc -o "$PARSER_DIR/$name.so" -shared -fPIC -Os -I src $SOURCES
+    gcc -o "$PARSER_DIR/$name.so" -shared -fPIC -Os -I src $SOURCES -lstdc++
   fi
 
   echo "$name parser installed."
@@ -58,20 +59,31 @@ install_queries() {
   done
 }
 
+install_ecma_queries() {
+  echo "Fetching ECMA queries (base for JS/TS)..."
+  mkdir -p "$QUERIES_DIR/ecma"
+  for file in "highlights.scm" "indents.scm" "locals.scm"; do
+    curl -fsSL "$BASE_URL/ecma/$file" -o "$QUERIES_DIR/ecma/$file" || echo "Warning: could not fetch ecma/$file"
+  done
+}
+
+# --- ECMA (Base) ---
+install_ecma_queries
+
 # --- Go ---
 compile_parser "go" "https://github.com/tree-sitter/tree-sitter-go"
 install_queries "go" "highlights.scm" "indents.scm"
 
 # --- TypeScript ---
 compile_parser "typescript" "https://github.com/tree-sitter/tree-sitter-typescript" "typescript"
-install_queries "typescript" "highlights.scm" "indents.scm"
+install_queries "typescript" "highlights.scm" "indents.scm" "locals.scm"
 
 # --- TSX ---
 compile_parser "tsx" "https://github.com/tree-sitter/tree-sitter-typescript" "tsx"
-install_queries "tsx" "highlights.scm" "indents.scm"
+install_queries "tsx" "highlights.scm" "indents.scm" "locals.scm"
 
 # --- Bash ---
 compile_parser "bash" "https://github.com/tree-sitter/tree-sitter-bash"
-install_queries "bash" "highlights.scm" "indents.scm"
+install_queries "bash" "highlights.scm"
 
 echo "All parsers installed successfully."
