@@ -1,10 +1,11 @@
 -- Enable Tree-sitter
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    local ok, _ = pcall(vim.treesitter.start)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function(args)
+    local lang = vim.bo[args.buf].filetype
+    local ok, err = pcall(vim.treesitter.start, args.buf, lang)
     if not ok then
-      -- No parser available for this filetype, silently skip
+      vim.notify('Tree-sitter failed to start for ' .. lang .. ': ' .. err, vim.log.levels.ERROR)
     end
   end,
 })
