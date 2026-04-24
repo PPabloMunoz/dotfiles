@@ -10,11 +10,14 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-INC_APPEND_HISTORY="true"
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
-setopt appendhistory
-setopt HIST_IGNORE_ALL_DUPS
+setopt SHARE_HISTORY          # Share history between sessions
+setopt APPEND_HISTORY         # Append to history file
+setopt INC_APPEND_HISTORY     # Write to history file immediately
+setopt HIST_IGNORE_ALL_DUPS   # Don't store duplicates
+setopt HIST_REDUCE_BLANKS     # Remove unnecessary blanks
+setopt HIST_IGNORE_SPACE      # Don't record commands starting with a space
 setopt autocd extendedglob nomatch menucomplete interactive_comments
 unsetopt correct_all BEEP
 autoload -Uz colors && colors
