@@ -1,6 +1,6 @@
 -- Enable Tree-sitter
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'typescript', 'tsx', 'go', 'bash' },
+  pattern = { 'typescript', 'tsx', 'go', 'bash', 'sql' },
   callback = function(args)
     local lang = vim.bo[args.buf].filetype
     local ok, err = pcall(vim.treesitter.start, args.buf, lang)
