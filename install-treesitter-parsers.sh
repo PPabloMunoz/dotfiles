@@ -5,6 +5,12 @@ PARSER_DIR="$HOME/.local/share/nvim/site/parser"
 QUERIES_DIR="$HOME/.config/nvim/queries"
 BASE_URL="https://raw.githubusercontent.com/nvim-treesitter/nvim-treesitter/master/queries"
 
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
 mkdir -p "$PARSER_DIR"
 
 if ! command -v gcc &>/dev/null; then
@@ -19,7 +25,12 @@ compile_parser() {
   local repo="$2"
   local src_subdir="${3:-}"  # optional subdirectory inside the repo
 
-  echo "Installing $name parser..."
+  if [ -f "$PARSER_DIR/$name.so" ]; then
+    echo -e "${YELLOW}➜ $name parser is already installed. Skipping...${NC}"
+    return 0
+  fi
+
+  echo -e "${BLUE}⚙ Installing $name parser...${NC}"
 
   local TMP_DIR=$(mktemp -d)
   trap "rm -rf $TMP_DIR" EXIT
@@ -41,7 +52,7 @@ compile_parser() {
     gcc -o "$PARSER_DIR/$name.so" -shared -fPIC -Os -I src $SOURCES -lstdc++
   fi
 
-  echo "$name parser installed."
+  echo -e "${GREEN}✓ $name parser installed.${NC}"
 }
 
 install_queries() {
@@ -54,16 +65,16 @@ install_queries() {
   for file in "${files[@]}"; do
     local url="$BASE_URL/$lang/$file"
     local dest="$QUERIES_DIR/$lang/$file"
-    echo "Fetching $lang/$file..."
-    curl -fsSL "$url" -o "$dest" || echo "Warning: could not fetch $url"
+    echo -e "${BLUE}  ⬇ Fetching $lang/$file...${NC}"
+    curl -fsSL "$url" -o "$dest" || echo -e "${YELLOW}  ⚠ Warning: could not fetch $url${NC}"
   done
 }
 
 install_ecma_queries() {
-  echo "Fetching ECMA queries (base for JS/TS)..."
+  echo -e "${BLUE}⚙ Fetching ECMA queries (base for JS/TS)...${NC}"
   mkdir -p "$QUERIES_DIR/ecma"
   for file in "highlights.scm" "indents.scm" "locals.scm"; do
-    curl -fsSL "$BASE_URL/ecma/$file" -o "$QUERIES_DIR/ecma/$file" || echo "Warning: could not fetch ecma/$file"
+    curl -fsSL "$BASE_URL/ecma/$file" -o "$QUERIES_DIR/ecma/$file" || echo -e "${YELLOW}  ⚠ Warning: could not fetch ecma/$file${NC}"
   done
 }
 
@@ -86,4 +97,4 @@ install_queries "tsx" "highlights.scm" "indents.scm" "locals.scm"
 compile_parser "bash" "https://github.com/tree-sitter/tree-sitter-bash"
 install_queries "bash" "highlights.scm"
 
-echo "All parsers installed successfully."
+echo -e "\n${GREEN}✨ All parsers processed successfully.${NC}"
