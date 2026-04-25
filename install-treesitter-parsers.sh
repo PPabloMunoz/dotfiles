@@ -24,6 +24,7 @@ compile_parser() {
   local name="$1"
   local repo="$2"
   local src_subdir="${3:-}"  # optional subdirectory inside the repo
+  local branch="${4:-}"      # optional branch
 
   if [ -f "$PARSER_DIR/$name.so" ]; then
     echo -e "${YELLOW}➜ $name parser is already installed. Skipping...${NC}"
@@ -35,7 +36,11 @@ compile_parser() {
   local TMP_DIR=$(mktemp -d)
   trap "rm -rf $TMP_DIR" EXIT
 
-  git clone --depth=1 "$repo" "$TMP_DIR/$name"
+  if [ -n "$branch" ]; then
+    git clone --depth=1 -b "$branch" "$repo" "$TMP_DIR/$name"
+  else
+    git clone --depth=1 "$repo" "$TMP_DIR/$name"
+  fi
 
   local SRC_DIR="$TMP_DIR/$name"
   [ -n "$src_subdir" ] && SRC_DIR="$SRC_DIR/$src_subdir"
@@ -96,5 +101,9 @@ install_queries "tsx" "highlights.scm" "indents.scm" "locals.scm"
 # --- Bash ---
 compile_parser "bash" "https://github.com/tree-sitter/tree-sitter-bash"
 install_queries "bash" "highlights.scm"
+
+# --- SQL ---
+compile_parser "sql" "https://github.com/DerekStride/tree-sitter-sql" "" "gh-pages"
+install_queries "sql" "highlights.scm" "indents.scm"
 
 echo -e "\n${GREEN}✨ All parsers processed successfully.${NC}"
