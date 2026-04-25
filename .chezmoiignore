@@ -1,5 +1,8 @@
 .gitconfig
 scripts/**
+install.sh
+Brewfile
+run_once_install-treesitter-parsers.sh
 
 {{ if ne .chezmoi.os "darwin" }}
 .config/aerospace
