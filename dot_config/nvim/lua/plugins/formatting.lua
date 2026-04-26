@@ -28,7 +28,6 @@ return {
           javascriptreact = { 'oxlint', 'oxfmt' },
           typescriptreact = { 'oxlint', 'oxfmt' },
           astro = { 'oxlint', 'oxfmt' },
-          sql = { 'sqlfmt' },
         },
       })
     end,
