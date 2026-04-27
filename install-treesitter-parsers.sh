@@ -106,4 +106,8 @@ install_queries "bash" "highlights.scm"
 compile_parser "sql" "https://github.com/DerekStride/tree-sitter-sql" "" "gh-pages"
 install_queries "sql" "highlights.scm" "indents.scm"
 
+# --- Java ---
+compile_parser "java" "https://github.com/tree-sitter/tree-sitter-java"
+install_queries "java" "highlights.scm" "indents.scm" "locals.scm" "injections.scm" "folds.scm"
+
 echo -e "\n${GREEN}✨ All parsers processed successfully.${NC}"
