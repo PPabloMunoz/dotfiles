@@ -90,6 +90,10 @@ install_ecma_queries
 compile_parser "go" "https://github.com/tree-sitter/tree-sitter-go"
 install_queries "go" "highlights.scm" "indents.scm"
 
+# --- JavaScript ---
+compile_parser "javascript" "https://github.com/tree-sitter/tree-sitter-javascript"
+install_queries "javascript" "highlights.scm" "indents.scm" "locals.scm" "injections.scm" "folds.scm"
+
 # --- TypeScript ---
 compile_parser "typescript" "https://github.com/tree-sitter/tree-sitter-typescript" "typescript"
 install_queries "typescript" "highlights.scm" "indents.scm" "locals.scm"
