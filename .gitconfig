@@ -2,7 +2,7 @@
     email=pablomunoz@pablomunoz.dev
     username=Pablo Muñoz
     name=Pablo Muñoz
-    signingkey = 
+    signingkey = ~/.ssh/id_ed25519
 
 # Override identity for University folder
 [includeIf "gitdir:~/projects/uva/"]
@@ -10,9 +10,6 @@
 
 [gpg]
     format = ssh
-
-[gpg "ssh"]
-    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [merge]
     conflictstyle = diff3
