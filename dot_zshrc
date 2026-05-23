@@ -112,6 +112,13 @@ alias gaa='git add --all'
 alias gc='git commit -m'
 alias gdiff='git diff'
 
+# pnpm
+export PNPM_HOME="/Users/pablomunoz/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+
 # Init tools
 eval_if_exists "carapace" "source <(carapace _carapace)"
 eval_if_exists "starship" "$(starship init zsh)"
