@@ -20,14 +20,13 @@ return {
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
-          local tb = require('telescope.builtin')
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('grd', tb.lsp_definitions, '[G]oto [D]efinition')
-          map('grr', tb.lsp_references, '[G]oto [R]eferences')
-          map('gri', tb.lsp_implementations, '[G]oto [I]mplementation')
-          -- map('gO', tb.lsp_document_symbols, 'Open Document Symbols')
-          -- map('gW', tb.lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
-          -- map('grt', tb.lsp_type_definitions, '[G]oto [T]ype Definition')
+          map('grd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+          map('grr', vim.lsp.buf.references, '[G]oto [R]eferences')
+          map('gri', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+          -- map('gO', vim.lsp.buf.document_symbols, 'Open Document Symbols')
+          -- map('gW', vim.lsp.buf.workspace_symbols, 'Open Workspace Symbols')
+          -- map('grt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
           -- map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
           -- map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         end,

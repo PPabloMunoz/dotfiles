@@ -12,6 +12,7 @@ return {
 
   -- Telescope fuzzy finder
   {
+    enabled = false,
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -65,5 +66,55 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[S]earch [F]iles' })
     end,
+  },
+
+  {
+    'dmtrKovalenko/fff.nvim',
+    build = function()
+      -- downloads a prebuilt binary or falls back to cargo build
+      require('fff.download').download_or_build_binary()
+    end,
+    -- for nixos:
+    -- build = "nix run .#release",
+    opts = {
+      debug = {
+        enabled = true,
+        show_scores = true,
+      },
+      git = {
+        status_text_color = true,
+      },
+    },
+    lazy = false, -- the plugin lazy-initialises itself
+    keys = {
+      {
+        '<leader><leader>',
+        function()
+          require('fff').find_files()
+        end,
+        desc = 'FFFind files',
+      },
+      {
+        '<leader>sg',
+        function()
+          require('fff').live_grep()
+        end,
+        desc = 'LiFFFe grep',
+      },
+      {
+        '<leader>sz',
+        function()
+          require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain' } } })
+        end,
+        desc = 'Live fffuzy grep',
+      },
+      {
+        '<leader>sw',
+        function()
+          require('fff').live_grep({ query = vim.fn.expand('<cword>') })
+        end,
+        desc = 'Search current word',
+      },
+    },
   },
 }
