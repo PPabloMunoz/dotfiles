@@ -32,6 +32,8 @@ export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
 export PATH="$HOME/.bun/bin:$PATH"
 # Tools/SDKs
 export PATH="/opt/homebrew/opt/openjdk@21/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+# Rust
+export PATH="/Users/pablomunoz/.cargo/bin:$PATH"
 
 export CARAPACE_BRIDGES='zsh'
 export NODE_ENV=development
