@@ -5,7 +5,6 @@ tap "tursodatabase/tap"
 
 brew "bat"
 brew "carapace"
-brew "chezmoi"
 brew "coreutils"
 brew "curl"
 brew "eza"

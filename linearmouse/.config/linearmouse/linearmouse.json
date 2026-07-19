@@ -1,0 +1,50 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.11.3",
+  "schemes" : [
+    {
+      "buttons" : {
+        "universalBackForward" : true
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xb034",
+          "productName" : "MX Master 3S",
+          "serialNumber" : "B5225E1D",
+          "vendorID" : "0x46d"
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : true
+      },
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : "auto",
+        "reverse" : {
+          "vertical" : true
+        },
+        "smoothed" : {
+          "horizontal" : {
+            "acceleration" : 0.88,
+            "bouncing" : false,
+            "enabled" : true,
+            "inertia" : 0.9200000000000002048,
+            "preset" : "smooth",
+            "response" : 0.8,
+            "speed" : 1
+          },
+          "vertical" : {
+            "acceleration" : 0.1,
+            "bouncing" : false,
+            "enabled" : true,
+            "inertia" : 0.1,
+            "preset" : "smooth",
+            "response" : 1,
+            "speed" : 0.3
+          }
+        },
+        "speed" : 0
+      }
+    }
+  ]
+}
