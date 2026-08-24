@@ -45,6 +45,47 @@
         },
         "speed" : 0
       }
+    },
+    {
+      "buttons" : {
+        "universalBackForward" : true
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc539",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : true
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "reverse" : {
+          "vertical" : true
+        },
+        "smoothed" : {
+          "vertical" : {
+            "acceleration" : 0,
+            "bouncing" : true,
+            "enabled" : true,
+            "inertia" : 0,
+            "preset" : "smooth",
+            "response" : 0.9,
+            "speed" : 0.07
+          }
+        },
+        "speed" : {
+          "vertical" : 0
+        }
+      }
     }
   ]
 }

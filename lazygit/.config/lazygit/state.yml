@@ -1,9 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
     - /Users/pablomunoz/.local/share/dotfiles
+    - /Users/pablomunoz/dev/noports
 startuppopupversion: 0
 didshowhunkstaginghint: false
-lastversion: 0.63.0
+lastversion: 0.64.1
 customcommandshistory: []
 hidecommandlog: false
-githubPullRequests: {}
