@@ -1,9 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
     - /Users/pablomunoz/.local/share/dotfiles
-    - /Users/pablomunoz/dev/noports
 startuppopupversion: 0
-didshowhunkstaginghint: false
+didshowhunkstaginghint: true
 lastversion: 0.64.1
 customcommandshistory: []
 hidecommandlog: false
