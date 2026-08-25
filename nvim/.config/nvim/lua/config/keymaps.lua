@@ -2,6 +2,9 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- use jk to exit insert mode
+vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+
 -- use oil.nvim instead of the snacks explorer for <leader>e
 vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open oil" })
 
