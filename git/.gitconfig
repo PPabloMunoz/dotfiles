@@ -5,7 +5,7 @@
     signingkey = ~/.ssh/id_ed25519
 
 # Override identity for University folder
-[includeIf "gitdir:~/projects/uva/"]
+[includeIf "gitdir:~/dev/uva/"]
     path = ~/.gitconfig-university
 
 [gpg]
