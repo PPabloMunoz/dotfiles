@@ -14,6 +14,9 @@
           "vendorID" : "0x46d"
         }
       },
+      "logitech" : {
+        "highResolutionWheel" : false
+      },
       "pointer" : {
         "disableAcceleration" : true
       },
@@ -39,8 +42,8 @@
             "enabled" : true,
             "inertia" : 0,
             "preset" : "smooth",
-            "response" : 1,
-            "speed" : 0.2
+            "response" : 0.5,
+            "speed" : 0.1
           }
         },
         "speed" : 0
