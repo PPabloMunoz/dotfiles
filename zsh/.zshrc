@@ -70,7 +70,7 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 _comp_options+=(globdots)
 compinit
 
-eval_if_exists "zoxide" "$(zoxide init zsh)"
+# eval_if_exists "zoxide" "$(zoxide init zsh)"
 eval_if_exists "fnm" "$(fnm env)"
 eval_if_exists "fzf" "$(fzf --zsh)"
 
@@ -86,7 +86,7 @@ zsh_add_plugin "michaelAquilina/zsh-you-should-use"
 alias ls="eza -s type"
 alias ll="eza --color=always --icons --no-time --git --long"
 alias la="eza --color=always --icons --no-time --git --long --all"
-alias cd="z"
+# alias cd="z"
 
 # Tools
 alias cat="bat --paging=never --wrap=never --style=plain"
