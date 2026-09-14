@@ -37,13 +37,13 @@
             "speed" : 1
           },
           "vertical" : {
-            "acceleration" : 0,
+            "acceleration" : 0.78,
             "bouncing" : false,
             "enabled" : true,
-            "inertia" : 0,
-            "preset" : "smooth",
-            "response" : 0.5,
-            "speed" : 0.1
+            "inertia" : 0.44,
+            "preset" : "linear",
+            "response" : 0.9200000000000002048,
+            "speed" : 1
           }
         },
         "speed" : 0
