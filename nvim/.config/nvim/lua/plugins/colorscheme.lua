@@ -1,12 +1,16 @@
 return {
   -- add gruvbox
-  { "tahayvr/matteblack.nvim" },
-
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "matteblack",
+      colorscheme = "tokyonight-night",
     },
   },
 }
