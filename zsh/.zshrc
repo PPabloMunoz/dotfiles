@@ -34,6 +34,8 @@ export PATH="$HOME/.bun/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 # Rust
 export PATH="/Users/pablomunoz/.cargo/bin:$PATH"
+# OpenJDK
+export PATH="/opt/homebrew/opt/openjdk@25/bin:$PATH"
 
 export CARAPACE_BRIDGES='zsh'
 export NODE_ENV=development
