@@ -36,6 +36,8 @@ export PATH="/opt/homebrew/opt/openjdk@21/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/Users/pablomunoz/.cargo/bin:$PATH"
 # OpenJDK
 export PATH="/opt/homebrew/opt/openjdk@25/bin:$PATH"
+export JAVA_HOME="$(/usr/libexec/java_home -v 25)"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@25/include"
 
 export CARAPACE_BRIDGES='zsh'
 export NODE_ENV=development
