@@ -39,6 +39,8 @@ export PATH="/opt/homebrew/opt/openjdk@25/bin:$PATH"
 export JAVA_HOME="$(/usr/libexec/java_home -v 25)"
 export PATH="$JAVA_HOME/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@25/include"
+# Rust
+export PATH=/opt/homebrew/opt/rustup/bin:$PATH
 
 export CARAPACE_BRIDGES='zsh'
 export NODE_ENV=development
