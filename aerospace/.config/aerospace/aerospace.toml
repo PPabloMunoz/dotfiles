@@ -249,3 +249,7 @@ run = ['layout floating']
 [[on-window-detected]]
 if.window-title-regex-substring = 'bitwarden'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'so.cap.desktop'
+run = ['layout floating']
