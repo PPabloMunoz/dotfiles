@@ -1,81 +1,50 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """\
-[╭╴](fg:arrow)\
-$username\
-$hostname\
-$directory\
-$git_branch\
-$git_state\
-$git_status\
-$git_metrics\
-$cmd_duration
-[╰─](fg:arrow)$character\
-"""
-
-add_newline = true # Disable the blank line at the start of the prompt
-command_timeout = 2000 # 2 seconds
-
-palette = "normal"
-
-[cmd_duration]
-format = "[$symbol $duration]($style) "
-style = "bold cyan"
-min_time = 1000
-show_notifications = false
-
-[git_state]
-format = "[\\($state( $progress_current/$progress_total)\\)]($style) "
-style = "bold red"
-
-[git_metrics]
-added_style = "bold blue"
-format = "[+$added]($added_style)/[-$deleted]($deleted_style) "
-deleted_style = "bold red"
-disabled = false
-
-[fill]
-symbol = " "
-
-[directory]
-format = "[$symbol $path](bold $style)[$read_only]($read_only_style) "
-truncation_length = 4
-style = "fg:directory"
-read_only_style = "fg:directory"
-before_repo_root_style = "dimmed fg:directory"
-truncation_symbol = "…/"
-truncate_to_repo = false
-read_only = "  "
-home_symbol = "~"
-
-[palettes.normal]
-arrow = "#333533"
-directory = "#9ffff5"
-git = "#f17f29"
-git_status = "#DFEBED"
-
-# I disabled some modules (Rust, Java...) since some things aren't installed in my machine, enable them if you need.
-
-[username]
-style_user = 'bold'
-style_root = 'bold'
-format = ' [$user](fg:$style)'
-show_always = true
-
-[hostname]
-ssh_only = false
-format = ' on [$hostname](bold red) in'
-disabled = false
+add_newline = false
+# A minimal left prompt
+format = """$directory$character"""
+palette = "catppuccin_mocha"
+# move the rest of the prompt to the right
+right_format = """$all"""
+command_timeout = 1000
 
 [character]
-success_symbol = "[󰍟](fg:arrow)"
-error_symbol = "[󰍟](fg:red)"
+vicmd_symbol = "[N] >>>"
+success_symbol = '[➜](bold green)'
 
 [git_branch]
-format = '[$symbol $branch ]($style)'
-symbol = ""
-style = "bold fg:git"
+format =  '[$symbol$branch(:$remote_branch)]($style)'
 
-[git_status]
-style = "fg:git"
-format = '[($all_status$ahead_behind )]($style)'
+[golang]
+format = '[ ](bold cyan)'
+
+[docker_context]
+disabled = true
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
