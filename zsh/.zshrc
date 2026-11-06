@@ -93,13 +93,13 @@ zsh_add_plugin "michaelAquilina/zsh-you-should-use"
 alias ls="eza -s type"
 alias ll="eza --color=always --icons --no-time --git --long"
 alias la="eza --color=always --icons --no-time --git --long --all"
-# alias cd="z"
 
 # Tools
 alias cat="bat --paging=never --wrap=never --style=plain"
 alias lg="lazygit -ucd ~/.config/lazygit/"
 alias vim="nvim"
 alias oc="opencode"
+alias j="just"
 
 # ZSH
 alias zsh:reload="source $HOME/.zshrc"
