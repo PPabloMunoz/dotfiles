@@ -112,6 +112,7 @@ alias tls="t ls"
 alias tn="t new -t"
 
 # Git
+alias g="git"
 alias gl='git pull'
 alias gp='git push'
 alias gs='git status'
