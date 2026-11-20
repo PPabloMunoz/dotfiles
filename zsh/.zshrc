@@ -112,15 +112,14 @@ alias tls="t ls"
 alias tn="t new -t"
 
 # Git
-alias g="git"
-alias gl='git pull'
-alias gp='git push'
-alias gs='git status'
-alias gss='git status -s'
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit -m'
-alias gdiff='git diff'
+# alias gl='git pull'
+# alias gp='git push'
+# alias gs='git status'
+# alias gss='git status -s'
+# alias ga='git add'
+# alias gaa='git add --all'
+# alias gc='git commit -m'
+# alias gdiff='git diff'
 
 # pnpm
 export PNPM_HOME="/Users/pablomunoz/Library/pnpm"
@@ -132,3 +131,6 @@ esac
 # Init tools
 eval_if_exists "carapace" "source <(carapace _carapace)"
 eval_if_exists "starship" "$(starship init zsh)"
+
+# Added by Kiri: its docker and kiri commands (kiri setup --uninstall removes this)
+case ":$PATH:" in *":$HOME/.kiri/bin:"*) ;; *) export PATH="$PATH:$HOME/.kiri/bin" ;; esac
